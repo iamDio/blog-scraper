@@ -1,19 +1,32 @@
 // Dependencies
-let bodyParser=require ("bodyParser");
-// Require request and cheerio. This makes the scraping possible
+let bodyParser=require ("body-parser");
+let express =require('express');
+let hndlbrs =require('express-handlebars');
+let mongoose=require('mongoose');
+let mongojs = require('mongojs');
 
+// Require request and cheerio. This makes the scraping possible
+let request= require('request');
+let cheerio= require('cheerio');
 
 // Initialize Express
-
+let app = express();
+const PORT = process.env.port || 3000;
 
 // Database configuration
-
+let databaseUrl = 'articleScraper';
+let collections = ['scrapedData'];
 
 // Hook mongojs configuration to the db variable
-
+var db = mongojs(databaseUrl, collections)
+db.on('error', function (err) {
+    console.log('database error', err)
+});
 
 // Main route (simple Hello World Message)
-
+app.get('/', function(req,res){
+	res.send("Hello World")
+});
 
 // Retrieve data from the db
 	  // Find all results from the scrapedData collection in the db
@@ -42,3 +55,5 @@ let bodyParser=require ("bodyParser");
   // Send a "Scrape Complete" message to the browser
 
 // Listen on port 3000
+app.listen(PORT, () => console.log(`app running on port: ${PORT}`));
+
