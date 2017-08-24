@@ -4,11 +4,7 @@ let mongoose=require('mongoose');
 let Schema = mongoose.Schema;
 
 let NewsSchema = new Schema({
-	id: {
-		type: Number,
-		unique: true,
-		index: true
-	},
+
 	//title string
 	title:{
 		type: String,

@@ -8,18 +8,18 @@ let mongoose=require('mongoose');
 
 // Requiring our Note and Article models
 var Note = require("./models/Note.js");
-var Article = require("./models/Article.js");
+var News = require("./models/News.js");
 
 // Require request and cheerio. This makes the scraping possible
 let request= require('request');
 let cheerio= require('cheerio');
 
-mongoose.Promise = Promise;
 
 // Initialize Express
 let app = express();
 const PORT = process.env.port || 3000;
 
+mongoose.Promise = Promise;
 
 // Use morgan and body parser with our app
 app.use(logger("dev"));
@@ -55,23 +55,18 @@ app.get('/', function(req,res){
 
 //write a function that hcecks for errors
 //@TODO: rewrite this code using async/await for better error handling
-function errorCheck(error,res,doc) {
-	if(error){
-		res.send(doc);
-	}else{
-		res.json(doc);
-	}
-}
+
 
 app.get('/scrape', function(req,res){
 	request('http://www.cnn.com/', function(error, response, html) {
 		let $ = cheerio.load(html);
 		$('article h3').each(function(i, element) {
+
 			let result = {};
 			result.title = $(this).children('a').text();
-			result.link =  $(this).childre('a').attr('href');
-
-		let entry = new Article(result);
+			result.link =  $(this).children('a').attr('href');
+			console.log(result)
+		let entry = new News(result);
 
 			entry.save(function(err,doc){
 				if(err) {
@@ -85,19 +80,28 @@ app.get('/scrape', function(req,res){
 	res.send('scrape complete');
 })
 
+//retrieves from the db all of the articles scraped 
 app.get('/articles', function(req, res){
-	Article.find({}, function(error,doc){
-		errorCheck(error,res,doc);
+	News.find({}, function(error,doc){
+		if(error) {
+			console.log(error);
+		}else{
+			res.json(doc);
+		}
 	});
 });
 
+//retrieves from the db a specific article
 app.get('/articles/:id', function(req,res){
-	Article.findOne({_id: req.params.id})
+	News.findOne({_id: req.params.id})
 		.populate('')
-		.exec((error,doc)=>{
-		errorCheck(error,res,doc);
-
-		})
+		.exec(function(error,doc) {
+		if(error) {
+			console.log(error);
+		}else{
+			res.json(doc);
+			}
+		});
 });
 
 

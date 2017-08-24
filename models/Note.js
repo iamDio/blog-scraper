@@ -25,6 +25,6 @@ let NoteSchema = new Schema({
 	}
 });
 
-let NoteModel = mongoose.model('Article',NoteSchema);
+let NoteModel = mongoose.model('Note',NoteSchema);
 
 module.exports = NoteModel;
