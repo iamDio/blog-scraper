@@ -1,9 +1,9 @@
-let mongoose=require('mongoose');
+const mongoose=require('mongoose');
 
 //define mongoose schema
-let Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-let NewsSchema = new Schema({
+const NewsSchema = new Schema({
 
 	//title string
 	title:{

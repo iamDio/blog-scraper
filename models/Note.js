@@ -1,9 +1,9 @@
 const mongoose=require('mongoose');
 
 //define mongoose schema
-let Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-let NoteSchema = new Schema({
+const NoteSchema = new Schema({
 	id: {
 		type: Number,
 		unique: true,
