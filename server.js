@@ -61,13 +61,11 @@ app.get('/scrape', function(req,res){
 
 			let result = {};
 			result.title = $(this).text();
-			result.text = $(this).prev('a').text();
-			result.link = $(this).prev('a').attr('href');
-/*			console.log(result.text)
-			console.log(result.title)*/
-			console.log(result.link)
+			result.text = $(this).parent('a').text();
+			result.link = $(this).parent('a').attr('href');
 
-/*		let entry = new News(result);
+			console.log(result)
+		let entry = new News(result);
 
 			entry.save(function(err,doc){
 				if(err) {
@@ -75,7 +73,7 @@ app.get('/scrape', function(req,res){
 				}else{
 					console.log(doc);
 				}
-			})*/
+			})
 			})
 		  }
 
