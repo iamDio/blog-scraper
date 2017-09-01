@@ -19,6 +19,8 @@ mongoose.Promise = Promise;
 let app = express();
 const PORT = process.env.port || 3000;
 
+app.engine("handlebars", hndlbrs({defaultLayout: 'main'}));
+app.set('view engine','handlebars');
 
 //set up morgan and bodyParser
 app.use(logger('dev'));
@@ -36,18 +38,19 @@ db.on('error', function(error){
 });
 
 //log a succesful message once connection to db is estabilished
+//@TODO: fix this line due to deprecation
 db.once('open', function(){
 	console.log('Mongoose connection succesful');
 });
 
-// Main route (simple Hello World Message)
+
+// Main route, should render index.handlebars
 app.get('/', function(req,res){
-	res.send('Hello World')
+	res.render('index')
 });
 
-
-//write a function that hcecks for errors
-//@TODO: rewrite this code using async/await and/or promise
+//write a function that checks for errors
+//@TODO: rewrite this code using async/await and/or promises
 
 app.get('/scrape', function(req,res){
 	request('https://medium.com/', function(error, response, html) {
