@@ -61,7 +61,7 @@ router.get("/articles", function(req, res) {
 			console.log(error);
 		} else {
 			//res.json(doc);
-			res.render("index", { article: doc });
+			res.render("articles", { article: doc });
 		}
 	});
 });

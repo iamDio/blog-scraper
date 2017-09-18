@@ -1,0 +1,15 @@
+<div>
+	<h1>Medium size bloggers</h1>
+	<h2> a collection of the latest blog posts from Medium.com </h2>
+
+		<div class="list-box">
+				{{#each article}}
+					<h3 > {{this.title}} </h3>
+					<a href={{this.link}}><h4 > Check out the article here! </h4> </a>
+					<h6> {{this.date}} </h6>
+		<button type="submit">add note </button>
+		<button type="submit">save article </button>
+					<hr>
+				{{/each}}
+		</div>
+</div>
