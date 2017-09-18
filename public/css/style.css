@@ -1,0 +1,17 @@
+body {
+	font-family: "Lucida Sans Typewriter", "Lucida Console", monaco,
+		"Bitstream Vera Sans Mono", monospace;
+	font-size: 10px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}
+
+.list-box {
+	border: 2px solid grey;
+}
+
+hr {
+	border: 0.5px solid grey;
+}

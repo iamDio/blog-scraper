@@ -12,7 +12,7 @@ const NewsSchema = new Schema({
 		required: true
 	},
 	//subtitle string
-	subtitle:{
+	link:{
 		type: String,
 		trim: true
 	},
