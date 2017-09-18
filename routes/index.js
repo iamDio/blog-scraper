@@ -19,7 +19,6 @@ router.get("/", function(req, res) {
 
 //write a function that checks for errors
 //@TODO: rewrite this code using async/await and/or promises
-
 router.get("/scrape", function(req, res) {
 	request("https://medium.com/", function(error, response, html) {
 		if (!error && response.statusCode == 200) {
@@ -48,8 +47,7 @@ router.get("/scrape", function(req, res) {
 					}
 				});
 			});
-
-			return res.json("scrape complete");
+			res.redirect("/articles");
 		}
 	});
 });
