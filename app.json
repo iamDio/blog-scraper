@@ -1,0 +1,7 @@
+{
+	"name": "Medium Scraper",
+	"description":
+		"An application which scrapes medium.com for the latest posts",
+	"repository": "https://github.com/iamDio/news-scraper.git",
+	"keywords": ["node", "express"]
+}
