@@ -34,7 +34,17 @@ app.use(express.static(__dirname + "/public"));
 
 app.use("/", routes);
 // set up mongoose connection
-mongoose.connect("mongodb://localhost/articleScraper");
+
+let options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };       
+ 
+let mongodbUri = 'mongodb://<dbuser>:<dbpassword>@ds147044.mlab.com:47044/heroku_pxf82bp9';
+ 
+mongoose.connect(mongodbUri, options);
+
+
+
+//mongoose.connect("ds147044.mlab.com:47044/heroku_pxf82bp9");
 let db = mongoose.connection;
 
 db.on("error", function(error) {
