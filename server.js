@@ -22,7 +22,7 @@ mongoose.Promise = Promise;
 
 // Initialize Express
 let app = express();
-const PORT = process.env.port || 4000;
+const PORT = process.env.PORT || 4000;
 
 app.engine("handlebars", hndlbrs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
