@@ -17,9 +17,12 @@ const routes = require("./routes/index");
 
 mongoose.Promise = Promise;
 
+
+
+
 // Initialize Express
 let app = express();
-const PORT = process.env.port || 3000;
+const PORT = process.env.port || 4000;
 
 app.engine("handlebars", hndlbrs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
@@ -35,16 +38,24 @@ app.use(express.static(__dirname + "/public"));
 app.use("/", routes);
 // set up mongoose connection
 
-let options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
-                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };       
+/*let options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } }; */      
  
-let mongodbUri = 'mongodb://<dbuser>:<dbpassword>@ds147044.mlab.com:47044/heroku_pxf82bp9';
+let MONGODB_URI = 'mongodb://heroku_pxf82bp9:qweasd123@ds147044.mlab.com:47044/';
  
-mongoose.connect(mongodbUri, options);
 
+ var uristring = 
+  process.env.MONGODB_URI || 
+  'mongodb://localhost/articleScraper';
 
+mongoose.connect(uristring, function (err, res) {
+  if (err) { 
+    console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+    console.log ('Succeeded connected to: ' + uristring);
+  }
+});
 
-//mongoose.connect("ds147044.mlab.com:47044/heroku_pxf82bp9");
 let db = mongoose.connection;
 
 db.on("error", function(error) {
